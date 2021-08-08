@@ -1,13 +1,17 @@
 import AdvertisingDataChart from './AdvertisingDataChart'
 import AdvertisingDataFilter from './AdvertisingDataFilter'
 import FilterInfo from './FilterInfo'
+import Container from './Container'
+import Panel from './Panel'
 
 const Dashboard = () => (
-  <div>
+  <Container>
     <AdvertisingDataFilter />
-    <FilterInfo />
-    <AdvertisingDataChart />
-  </div>
+    <Panel>
+      <FilterInfo />
+      <AdvertisingDataChart />
+    </Panel>
+  </Container>
 )
 
 export default Dashboard

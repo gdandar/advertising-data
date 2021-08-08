@@ -22,8 +22,8 @@ const AdvertisingDataChart = () => {
   return (
     <div>
       <XYPlot
-        height={300}
-        width={900}
+        height={400}
+        width={800}
         xType="time"
         margin={{ top: 40, right: 60, left: 50, bottom: 50 }}
       >

@@ -11,6 +11,7 @@ import {
   availableCampaignsState,
   availableDatasourcesState,
 } from '../state/selectors'
+import Panel from './Panel'
 
 const AdvertisingDataFilter = () => {
   const availableDatasources = useRecoilValue(availableDatasourcesState)
@@ -44,21 +45,40 @@ const AdvertisingDataFilter = () => {
   }
 
   return (
-    <div>
-      <Select
-        options={availableDatasources}
-        isMulti
-        placeholder="All"
-        onChange={handleOnDatasourcesChange}
-      />
-      <Select
-        options={availableCampaigns}
-        isMulti
-        placeholder="All"
-        onChange={handleOnCampaignsChange}
-      />
-      <button onClick={handleApplyFilter}>Apply</button>
-    </div>
+    <Panel blue>
+      <h3>Filter Dimension Values</h3>
+      <div
+        style={{
+          display: 'grid',
+          gridTemplateColumns: '5fr 1fr',
+          gridColumnGap: '6px',
+        }}
+      >
+        <div style={{ display: 'grid' }}>
+          <div>
+            <label>Datasources</label>
+            <Select
+              options={availableDatasources}
+              isMulti
+              placeholder="All"
+              onChange={handleOnDatasourcesChange}
+            />
+          </div>
+          <div>
+            <label>Campaigns</label>
+            <Select
+              options={availableCampaigns}
+              isMulti
+              placeholder="All"
+              onChange={handleOnCampaignsChange}
+            />
+          </div>
+        </div>
+        <button onClick={handleApplyFilter} style={{ alignSelf: 'end' }}>
+          Apply
+        </button>
+      </div>
+    </Panel>
   )
 }
 
