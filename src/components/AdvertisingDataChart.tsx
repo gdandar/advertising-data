@@ -8,20 +8,15 @@ import {
   MarkSeries,
 } from 'react-vis'
 import { useRecoilValue } from 'recoil'
-import {
-  advertisingDataChartState,
-  advertisingDataState,
-} from '../state/selectors'
+
+import { advertisingDataChartState } from '../state/selectors'
 
 const AdvertisingDataChart = () => {
   const chartData = useRecoilValue(advertisingDataChartState)
-  const advData = useRecoilValue(advertisingDataState)
 
   if (!chartData) {
     return null
   }
-
-  console.log(chartData)
 
   return (
     <div>
@@ -36,9 +31,7 @@ const AdvertisingDataChart = () => {
         <XAxis tickTotal={10} />
         <YAxis
           title="Clicks"
-          tickFormat={(tick) =>
-            `${Math.floor(tick * chartData.scaleMultiplier)}`
-          }
+          tickFormat={(tick) => `${Math.floor(tick * chartData.clicksYScale)}`}
         />
         <YAxis
           title="Impressions"
@@ -47,14 +40,14 @@ const AdvertisingDataChart = () => {
         />
         {/* Adding a hidden MarkSeries to make the y axis tick start from 0 */}
         <MarkSeries
-          data={[{ x: chartData.minDate, y: 0 }]}
+          data={[{ x: chartData.startDate, y: 0 }]}
           style={{ display: 'none' }}
         />
         <LineSeries
           data={chartData.clicksData}
           color="green"
           fill={0}
-          getY={(d) => d.y / chartData.scaleMultiplier}
+          getY={(d) => d.y / chartData.clicksYScale}
         />
         <LineSeries data={chartData.impressionsData} color="blue" fill={0} />
       </XYPlot>

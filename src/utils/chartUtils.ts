@@ -1,11 +1,24 @@
+import { LineSeriesPoint } from 'react-vis'
+
 import { AdvertisingData } from '../models/advertisingData'
+
+interface ChartData {
+  /** Line series points for displaying the number of clicks */
+  clicksData: LineSeriesPoint[]
+  /** Line series points for displaying the number of impressions */
+  impressionsData: LineSeriesPoint[]
+  /** The series start date */
+  startDate: number
+  /** Scale multiplier required to display clicks and impressions on the same chart */
+  clicksYScale: number
+}
 
 /**
  * Converts the given advertisement data to a format that can be used for visualisation
  * @param data Array of advertisement data to convert
  * @returns
  */
-export function convertToChartData(data: AdvertisingData[]) {
+export function convertToChartData(data: AdvertisingData[]): ChartData {
   const clicks: Record<string, { x: number; y: number }> = {}
   const impressions: Record<string, { x: number; y: number }> = {}
 
@@ -18,10 +31,11 @@ export function convertToChartData(data: AdvertisingData[]) {
       impressions[data.date].y += data.impressions
       clicks[data.date].y += data.clicks
     } else {
+      // Convert the date value from string DD.MM.YYYY to millisecs
       const dateValues = data.date.split('.')
-      const date = new Date(
-        `${dateValues[2]}-${dateValues[1]}-${dateValues[0]}`
-      ).getTime()
+      const date = Date.parse(
+        `${dateValues[1]}/${dateValues[0]}/${dateValues[2]}`
+      )
 
       impressions[data.date] = {
         x: date,
@@ -57,7 +71,7 @@ export function convertToChartData(data: AdvertisingData[]) {
   return {
     clicksData,
     impressionsData,
-    minDate,
-    scaleMultiplier: maxClicks / maxImpressions,
+    startDate: minDate,
+    clicksYScale: maxClicks / maxImpressions,
   }
 }

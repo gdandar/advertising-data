@@ -4,6 +4,7 @@ import { convertToChartData } from '../utils/chartUtils'
 import { getAdvertisingDataFromCsv } from '../utils/csvUtils'
 import { advertisngDataSourceState } from './atoms'
 
+/** Stores all advertising data as an array of AdvertisingData */
 export const advertisingDataState = selector({
   key: 'AdvertisingData',
   get: async ({ get }) => {
@@ -14,6 +15,7 @@ export const advertisingDataState = selector({
   },
 })
 
+/** Stores the advertising data in a format that can be used to visualize its */
 export const advertisingDataChartState = selector({
   key: 'AdvertisingDataChart',
   get: ({ get }) => {
