@@ -12,6 +12,11 @@ export function getAdvertisingDataFromCsv(csv: string): AdvertisingData[] {
   const headers = lines[0].split(',')
 
   for (var i = 1; i < lines.length; i++) {
+    // do not parse empty lines
+    if (lines[i].length === 0) {
+      continue
+    }
+
     const obj: Record<string, any> = {}
     const currentline = lines[i].split(',')
 

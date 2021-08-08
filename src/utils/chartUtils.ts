@@ -15,10 +15,12 @@ interface ChartData {
 
 /**
  * Converts the given advertisement data to a format that can be used for visualisation
- * @param data Array of advertisement data to convert
+ * @param advertisingData Array of advertisement data to convert
  * @returns
  */
-export function convertToChartData(data: AdvertisingData[]): ChartData {
+export function convertToChartData(
+  advertisingData: AdvertisingData[]
+): ChartData {
   const clicks: Record<string, { x: number; y: number }> = {}
   const impressions: Record<string, { x: number; y: number }> = {}
 
@@ -26,7 +28,7 @@ export function convertToChartData(data: AdvertisingData[]): ChartData {
   let maxClicks = 0
   let maxImpressions = 0
 
-  data.forEach((data) => {
+  advertisingData.forEach((data) => {
     if (impressions[data.date] || clicks[data.date]) {
       impressions[data.date].y += data.impressions
       clicks[data.date].y += data.clicks
@@ -72,6 +74,6 @@ export function convertToChartData(data: AdvertisingData[]): ChartData {
     clicksData,
     impressionsData,
     startDate: minDate,
-    clicksYScale: maxClicks / maxImpressions,
+    clicksYScale: maxImpressions === 0 ? 1 : maxClicks / maxImpressions,
   }
 }

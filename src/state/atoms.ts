@@ -8,13 +8,13 @@ export const advertisngDataSourceState = atom({
 })
 
 /** Stores the datasource names selected by the user */
-export const selectedAdvertisingDatasourcesState = atom({
+export const selectedAdvertisingDatasourcesState = atom<string[]>({
   key: 'SelectedAdvertisingDatasources',
   default: [],
 })
 
 /** Stores the campaign names selected by the user */
-export const selectedAdvertisingCampaignsState = atom({
+export const selectedAdvertisingCampaignsState = atom<string[]>({
   key: 'SelectedAdvertisingCampaigns',
   default: [],
 })

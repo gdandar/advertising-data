@@ -6,6 +6,7 @@ import {
   XAxis,
   YAxis,
   MarkSeries,
+  DiscreteColorLegend,
 } from 'react-vis'
 import { useRecoilValue } from 'recoil'
 
@@ -50,6 +51,10 @@ const AdvertisingDataChart = () => {
           getY={(d) => d.y / chartData.clicksYScale}
         />
         <LineSeries data={chartData.impressionsData} color="blue" fill={0} />
+        <DiscreteColorLegend
+          orientation="horizontal"
+          items={['Clicks', 'Impressions']}
+        />
       </XYPlot>
     </div>
   )
