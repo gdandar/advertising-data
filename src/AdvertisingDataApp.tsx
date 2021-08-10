@@ -4,7 +4,7 @@ import { RecoilRoot } from 'recoil'
 import Dashboard from './components/Dashboard'
 import ErrorBoundary from './components/ErrorBoundary'
 
-function App() {
+function AdvertisingDataApp() {
   return (
     <RecoilRoot>
       <ErrorBoundary>
@@ -16,4 +16,4 @@ function App() {
   )
 }
 
-export default App
+export default AdvertisingDataApp

@@ -27,10 +27,14 @@ const AdvertisingDataFilter = () => {
   const [datasources, setDatasources] = useState<string[]>([])
   const [campaigns, setCampaigns] = useState<string[]>([])
 
-  const handleApplyFilter = useCallback(() => {
-    setSelectedDatasources(datasources)
-    setSelectedCampaigns(campaigns)
-  }, [datasources, campaigns, setSelectedDatasources, setSelectedCampaigns])
+  const handleApplyFilter = useCallback(
+    (e) => {
+      e.preventDefault()
+      setSelectedDatasources(datasources)
+      setSelectedCampaigns(campaigns)
+    },
+    [datasources, campaigns, setSelectedDatasources, setSelectedCampaigns]
+  )
 
   const handleOnDatasourcesChange = (
     selection: OptionsType<{ value: string; label: string }>
@@ -54,29 +58,31 @@ const AdvertisingDataFilter = () => {
           gridColumnGap: '6px',
         }}
       >
-        <div style={{ display: 'grid' }}>
-          <div>
-            <label>Datasources</label>
-            <Select
-              options={availableDatasources}
-              isMulti
-              placeholder="All"
-              onChange={handleOnDatasourcesChange}
-            />
+        <form onSubmit={handleApplyFilter}>
+          <div style={{ display: 'grid' }}>
+            <div>
+              <label htmlFor="datasources">Datasources</label>
+              <Select
+                inputId="datasources"
+                options={availableDatasources}
+                isMulti
+                placeholder="All"
+                onChange={handleOnDatasourcesChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="campaigns">Campaigns</label>
+              <Select
+                inputId="campaigns"
+                options={availableCampaigns}
+                isMulti
+                placeholder="All"
+                onChange={handleOnCampaignsChange}
+              />
+            </div>
           </div>
-          <div>
-            <label>Campaigns</label>
-            <Select
-              options={availableCampaigns}
-              isMulti
-              placeholder="All"
-              onChange={handleOnCampaignsChange}
-            />
-          </div>
-        </div>
-        <button onClick={handleApplyFilter} style={{ alignSelf: 'end' }}>
-          Apply
-        </button>
+          <input type="submit" value="Apply" style={{ alignSelf: 'end' }} />
+        </form>
       </div>
     </Panel>
   )

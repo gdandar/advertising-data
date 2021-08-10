@@ -56,12 +56,12 @@ export function convertToChartData(
     }
 
     // store the max values for clicks and impressions to set the scale for the corresponding line series later
-    if (maxClicks < data.clicks) {
-      maxClicks = data.clicks
+    if (maxClicks < clicks[data.date].y) {
+      maxClicks = clicks[data.date].y
     }
 
-    if (maxImpressions < data.impressions) {
-      maxImpressions = data.impressions
+    if (maxImpressions < impressions[data.date].y) {
+      maxImpressions = impressions[data.date].y
     }
   })
 
